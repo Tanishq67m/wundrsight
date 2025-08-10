@@ -97,7 +97,7 @@ CORS configured (adjust origin in backend for production)
 Unique slot bookings prevent race conditions
 
 Submission Checklist
-Frontend URL: wundrsight-ten.vercel.app
+Frontend URL: [wundrsight-ten.vercel.app](https://wundrsight-7bjn.vercel.app/)
 
 API URL: [https://<your-backend-render-url>](https://wundrsight.onrender.com/)
 
