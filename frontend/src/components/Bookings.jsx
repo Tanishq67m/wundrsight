@@ -15,8 +15,8 @@ export default function Bookings() {
       try {
         const url =
           role === "admin"
-            ? "http://localhost:5001/api/all-bookings"
-            : "http://localhost:5001/api/my-bookings";
+            ? "https://wundrsight.onrender.com/api/all-bookings"
+            : "https://wundrsight.onrender.com/api/my-bookings";
         const res = await authFetch(url, token);
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Failed to load bookings");

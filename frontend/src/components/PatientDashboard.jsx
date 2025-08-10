@@ -61,7 +61,7 @@ export default function PatientDashboard({ token }) {
       .slice(0, 10);
     try {
       const res = await fetch(
-        `http://localhost:5001/api/slots?from=${fromDate}&to=${toDate}`
+        `http://https://wundrsight.onrender.com/api/slots?from=${fromDate}&to=${toDate}`
       );
       if (!res.ok) throw new Error("Failed to load slots");
       const data = await res.json();
@@ -76,7 +76,7 @@ export default function PatientDashboard({ token }) {
   async function fetchBookings() {
     setLoadingBookings(true);
     try {
-      const res = await fetch("http://localhost:5001/api/my-bookings", {
+      const res = await fetch("http://https://wundrsight.onrender.com/api/my-bookings", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to load bookings");
@@ -92,7 +92,7 @@ export default function PatientDashboard({ token }) {
   async function bookSlot(slotId) {
     setBookingSlotId(slotId);
     try {
-      const res = await fetch("http://localhost:5001/api/book", {
+      const res = await fetch("http://https://wundrsight.onrender.com/api/book", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -27,7 +27,7 @@ export default function AdminDashboard({ token }) {
   async function fetchBookings() {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5001/api/all-bookings", {
+      const res = await fetch("https://wundrsight.onrender.com/api/all-bookings", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to load bookings");

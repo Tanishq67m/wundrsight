@@ -16,7 +16,7 @@ export default function Slots() {
       try {
         const from = new Date().toISOString();
         const to = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
-        const res = await fetch(`http://localhost:5001/api/slots?from=${from}&to=${to}`);
+        const res = await fetch(`http://https://wundrsight.onrender.com/api/slots?from=${from}&to=${to}`);
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Failed to load slots");
         setSlots(data);
@@ -34,7 +34,7 @@ export default function Slots() {
     setSuccess(null);
     try {
       const res = await authFetch(
-        "http://localhost:5001/api/book",
+        "http://https://wundrsight.onrender.com/api/book",
         token,
         {
           method: "POST",

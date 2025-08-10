@@ -51,7 +51,7 @@ export default function Register({ onRegister }) {
     }
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5001/api/register", {
+      const res = await fetch("http://https://wundrsight.onrender.com/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
