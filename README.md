@@ -1,4 +1,3 @@
-
 Wundrsight Appointment Booking System
 Overview
 Wundrsight is a full-stack appointment booking application designed for patients and admins. Patients can register, login, browse available appointment slots, and book them. Admins have access to all bookings.
@@ -119,3 +118,11 @@ Expand backend test coverage with unit and integration tests
 Refine frontend state management and add user feedback on actions
 
 Improve CORS configuration to only allow trusted origins in production
+
+
+### Screenshots
+
+![Screenshot 1](frontend/public/Screenshot%202025-08-10%20at%206.09.18%20PM.png)
+![Screenshot 2](frontend/public/Screenshot%202025-08-10%20at%206.10.15%20PM.png)
+![Screenshot 3](frontend/public/Screenshot%202025-08-10%20at%206.10.22%20PM.png)
+![Screenshot 4](frontend/public/Screenshot%202025-08-10%20at%206.10.41%20PM.png)
