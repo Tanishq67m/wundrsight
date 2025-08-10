@@ -57,8 +57,6 @@ ini
 Copy
 Edit
 DATABASE_URL="postgresql://neondb_owner:npg_2kjOu6XeTPbZ@ep-winter-rice-ad89h7ap-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
-# uncomment next line if you use Prisma <5.10
-# DATABASE_URL_UNPOOLED="postgresql://neondb_owner:npg_2kjOu6XeTPbZ@ep-winter-rice-ad89h7ap.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 
 JWT_SECRET=R2xwF6f1T2k9o5F2s9dFJf1aUhzxw9o0tueA43q0hs
 PORT=5001
