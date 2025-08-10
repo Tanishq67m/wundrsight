@@ -1,135 +1,123 @@
+
 Wundrsight Appointment Booking System
 Overview
-Wundrsight is a full-stack appointment booking app with patient and admin roles. Patients can register, login, view available slots, and book appointments. Admins can view all bookings. This project uses:
+Wundrsight is a full-stack appointment booking application designed for patients and admins. Patients can register, login, browse available appointment slots, and book them. Admins have access to all bookings.
 
-Backend: Node.js + Express + Prisma + PostgreSQL
+Tech Stack
+Backend: Node.js, Express, Prisma, PostgreSQL
 
-Frontend: React (or your chosen frontend tech) deployed on Vercel
+Frontend: React (or your chosen frontend framework)
 
-Authentication: JWT with Role-Based Access Control (RBAC)
+Auth: JWT-based with Role-Based Access Control (RBAC)
 
-Database: PostgreSQL (hosted separately, e.g., on Render)
+Database: PostgreSQL
 
 Architecture Notes
 Folder Structure Rationale
-backend/ - Contains API code, Prisma schema, and database seed scripts
+/backend — API code, Prisma schema, database seeds
 
-frontend/ - React app (or your chosen frontend framework)
+/frontend — Frontend app code
 
-Root contains shared configs like .gitignore, README.md
+Root contains shared configuration and documentation files
 
-Auth + RBAC Approach
-JWT tokens issued on login, signed with a secret
+Authentication & RBAC
+JWT tokens issued at login with user role embedded (patient or admin)
 
-User roles (patient, admin) embedded in JWT payload
+Middleware verifies JWT token and restricts access based on role
 
-Middleware checks token validity and user role before granting access to protected routes
+Booking Concurrency & Atomicity
+Unique constraint on slotId in the Booking model to prevent double booking
 
-Concurrency / Atomicity for Booking
-Booking slots use a unique constraint on slotId in the Booking model
+Booking attempts on already booked slots return a clear error response
 
-Attempting to book an already booked slot results in a controlled error (SLOT_TAKEN)
+Error Handling
+Centralized error responses with appropriate HTTP status codes
 
-This avoids race conditions and double bookings
+Logging for debugging errors like invalid tokens or booking conflicts
 
-Error Handling Strategy
-Centralized error handling with meaningful HTTP status codes and JSON error messages
-
-Catch blocks with logging for debugging
-
-Graceful handling of invalid tokens, invalid input, and DB constraints
-
-Setup & Running Locally
+Getting Started — Running Locally
 Prerequisites
-Node.js (v16+ recommended)
+Node.js (v16+)
 
 PostgreSQL database
 
 Git
 
-Steps
-Clone repo
+Setup Instructions
+Clone the repository
 
 bash
 Copy
 Edit
 git clone https://github.com/Tanishq67m/wundrsight.git
 cd wundrsight
-Set environment variables (create .env in backend/):
+Setup environment variables for backend (create .env in /backend)
 
 ini
 Copy
 Edit
-DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
-JWT_SECRET="your_jwt_secret_here"
-PORT=4000
-Install dependencies and seed database for backend
+DATABASE_URL="postgresql://neondb_owner:npg_2kjOu6XeTPbZ@ep-winter-rice-ad89h7ap-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+# uncomment next line if you use Prisma <5.10
+# DATABASE_URL_UNPOOLED="postgresql://neondb_owner:npg_2kjOu6XeTPbZ@ep-winter-rice-ad89h7ap.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+
+JWT_SECRET=R2xwF6f1T2k9o5F2s9dFJf1aUhzxw9o0tueA43q0hs
+PORT=5001
+Install backend dependencies, migrate database, and seed slots
 
 bash
 Copy
 Edit
 cd backend
 npm install
-npx prisma migrate deploy  # or prisma migrate dev if you want to create schema locally
+npx prisma migrate deploy
 node prisma/seed.js
-Run backend
-
-bash
-Copy
-Edit
 npm start
-Run frontend (in separate terminal)
+In a separate terminal, setup and run frontend
 
 bash
 Copy
 Edit
 cd ../frontend
 npm install
-npm run dev  # or npm start depending on your frontend
+npm run dev
 API Endpoints
-POST /api/register - Register new patient
+Method	Endpoint	Description	Auth Required	Role
+POST	/api/register	Register new user	No	-
+POST	/api/login	Login and receive JWT	No	-
+GET	/api/slots	Get available slots (filter by date range)	No	-
+POST	/api/book	Book a slot	Yes	patient
+GET	/api/my-bookings	Get bookings for logged-in user	Yes	patient
+GET	/api/all-bookings	Get all bookings (admin only)	Yes	admin
 
-POST /api/login - Login user, returns JWT
+Security Measures
+Passwords hashed using bcrypt
 
-GET /api/slots?from=YYYY-MM-DD&to=YYYY-MM-DD - Get available slots
+JWT secrets never logged or exposed
 
-POST /api/book - Book a slot (patient role required)
+CORS configured (adjust origin in backend for production)
 
-GET /api/my-bookings - Get bookings for logged-in patient
-
-GET /api/all-bookings - Get all bookings (admin only)
+Unique slot bookings prevent race conditions
 
 Submission Checklist
-Frontend URL: [your-frontend-vercel-url]
+Frontend URL: wundrsight-ten.vercel.app
 
-API URL: [your-backend-render-url]
+API URL: [https://<your-backend-render-url>](https://wundrsight.onrender.com/)
 
-Patient: patient@example.com / Passw0rd!
+Patient: tan1@123.com / 123!
 
 Admin: admin@example.com / Passw0rd!
 
 Repo URL: https://github.com/Tanishq67m/wundrsight
 
-Run locally: README steps verified
+Verified local setup instructions in README
 
-Postman/curl steps included in docs/postman-collection.json (if applicable)
+Postman/cURL scripts for API calls included in /docs (optional)
 
-Security Hygiene
-Passwords hashed with bcrypt
+Next Steps & Trade-offs
+Add rate limiting middleware to prevent brute-force login attempts
 
-JWT secrets never logged or exposed
+Expand backend test coverage with unit and integration tests
 
-CORS restricted to frontend origin on production (adjust in backend index.js)
+Refine frontend state management and add user feedback on actions
 
-(Optional) Add rate limiting middleware to protect against brute-force attacks
-
-Notes on Trade-offs & Next Steps
-Currently, CORS allows all origins for dev convenience; restrict in production
-
-No rate limiting implemented yet — can add express-rate-limit or similar
-
-Testing is minimal; next step is adding unit & integration tests for API endpoints
-
-Frontend uses simple state management; could improve with global state or React Query
-
-Deployment scripts/configs can be automated with CI/CD pipelines
+Improve CORS configuration to only allow trusted origins in production
