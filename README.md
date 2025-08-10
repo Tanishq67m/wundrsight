@@ -99,7 +99,7 @@ Unique slot bookings prevent race conditions
 Submission Checklist
 Frontend URL: [wundrsight-ten.vercel.app](https://wundrsight-7bjn.vercel.app/)
 
-API URL: [https://<your-backend-render-url>](https://wundrsight.onrender.com/)
+API URL: https://wundrsight.onrender.com/
 
 Patient: tan1@123.com / 123!
 
