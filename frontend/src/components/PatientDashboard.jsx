@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Calendar, Clock, CheckCircle, Loader2 } from "lucide-react";
 import { toast } from "react-toastify";
 
+const API_BASE = "https://wundrsight.onrender.com/api";
+
 const Button = ({ children, variant = "primary", size = "md", disabled, className = "", ...props }) => {
   const baseClasses = "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
   
@@ -61,7 +63,7 @@ export default function PatientDashboard({ token }) {
       .slice(0, 10);
     try {
       const res = await fetch(
-        `http://https://wundrsight.onrender.com/api/slots?from=${fromDate}&to=${toDate}`
+        `${API_BASE}/slots?from=${fromDate}&to=${toDate}`
       );
       if (!res.ok) throw new Error("Failed to load slots");
       const data = await res.json();
@@ -76,7 +78,8 @@ export default function PatientDashboard({ token }) {
   async function fetchBookings() {
     setLoadingBookings(true);
     try {
-      const res = await fetch("http://https://wundrsight.onrender.com/api/my-bookings", {
+      const res = await fetch(`${API_BASE}/my-bookings`
+        , {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to load bookings");
@@ -92,7 +95,7 @@ export default function PatientDashboard({ token }) {
   async function bookSlot(slotId) {
     setBookingSlotId(slotId);
     try {
-      const res = await fetch("http://https://wundrsight.onrender.com/api/book", {
+      const res = await fetch(`${API_BASE}/book`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
