@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5001/api";
+const API_BASE = "https://wundrsight.onrender.com/api";
 
 export async function login(email, password) {
   const res = await fetch(`${API_BASE}/login`, {
