@@ -121,7 +121,7 @@ Improve CORS configuration to only allow trusted origins in production
 
 
 ### Screenshots
-
+screenshots are saved in Public folder of frontend
 ![Screenshot 1](frontend/public/Screenshot%202025-08-10%20at%206.09.18%20PM.png)
 ![Screenshot 2](frontend/public/Screenshot%202025-08-10%20at%206.10.15%20PM.png)
 ![Screenshot 3](frontend/public/Screenshot%202025-08-10%20at%206.10.22%20PM.png)
